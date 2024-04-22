@@ -1,5 +1,0 @@
-databaseName=sql6700626
-URL=jdbc:mysql://sql6.freesqldatabase.com:3306/
-username=sql6700626
-password=z3J9eS7gFM
-driver=com.mysql.cj.jdbc.Driver
