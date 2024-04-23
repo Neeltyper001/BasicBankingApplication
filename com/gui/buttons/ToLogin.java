@@ -17,7 +17,8 @@ public class ToLogin extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Renderers.renderOut("welcomeTextPanel");
+                Renderers.renderOut("registerPanel");
+                Renderers.renderIn("loginPanel");
             }
         });
     }

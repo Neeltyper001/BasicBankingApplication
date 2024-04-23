@@ -14,7 +14,7 @@ public class ButtonsPanel extends JPanel implements FrameDimensions {
         setLayout(new FlowLayout(FlowLayout.CENTER));
         this.toLogin = new ToLogin("To Login");
         this.toRegister = new ToRegister("To Register");
-        this.setBounds(0,450,FRAME_WIDTH,100);
+        this.setBounds(0,550,FRAME_WIDTH,100);
         this.add(toLogin);
         this.add(toRegister);
     }

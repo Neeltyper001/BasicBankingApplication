@@ -13,7 +13,8 @@ public class ToRegister extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Renderers.renderIn("welcomeTextPanel");
+                Renderers.renderOut("loginPanel");
+                Renderers.renderIn("registerPanel");
             }
         });
     }
