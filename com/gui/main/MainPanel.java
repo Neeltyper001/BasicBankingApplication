@@ -10,6 +10,7 @@ import com.gui.panels.WelcomeTextPanel;
 import javax.swing.*;
 
 public class MainPanel extends JPanel implements FrameDimensions {
+
     private Renderers renderers;
     private WelcomeTextPanel welcomeTextPanel;
     private LoginPanel loginPanel;
@@ -31,4 +32,5 @@ public class MainPanel extends JPanel implements FrameDimensions {
         Renderers.addPanels("loginPanel",loginPanel);
         Renderers.addPanels("registerPanel",registerPanel);
     }
+
 }

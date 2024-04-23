@@ -5,13 +5,17 @@ import com.constants.FrameDimensions;
 import javax.swing.*;
 
 public class MainFrame extends JFrame implements FrameDimensions {
-    private MainPanel mainPanel;
+    private static MainPanel mainPanel;
     public MainFrame(){
-        mainPanel = new MainPanel();
+        MainFrame.mainPanel = new MainPanel();
         setBounds(X_COORD,Y_COORD,FRAME_WIDTH,FRAME_HEIGHT);
-        this.add(this.mainPanel);
+        this.add(MainFrame.mainPanel);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public static MainPanel getMainPanel(){
+        return MainFrame.mainPanel;
     }
 }

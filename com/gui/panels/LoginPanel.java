@@ -1,6 +1,7 @@
 package com.gui.panels;
 
 import com.constants.FrameDimensions;
+import com.users.LoginUser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +34,7 @@ public class LoginPanel extends JPanel implements FrameDimensions {
                 String password = new String(passwordField.getPassword());
                 System.out.println(username);
                 System.out.println(password);
+                LoginUser.loginUser(username,password);
             }
         });
         this.add(this.usernameLabel);

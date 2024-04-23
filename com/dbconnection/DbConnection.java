@@ -8,10 +8,10 @@ public class DbConnection {
         DbConnectionThread dbConnectionThread = new DbConnectionThread();
         Thread thread = new Thread(dbConnectionThread);
         thread.start();
-        connection = dbConnectionThread.getConnectionResult();
+        DbConnection.connection = dbConnectionThread.getConnectionResult();
     }
 
     public static Connection getConnection(){
-        return connection;
+        return DbConnection.connection;
     }
 }
