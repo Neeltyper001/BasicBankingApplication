@@ -26,7 +26,7 @@ public class DbConfig {
 
     public void setDbConfig(){
         this.databaseName = this.properties.getProperty("databaseName");
-        this.URL = this.properties.getProperty("URL");
+        this.URL = this.properties.getProperty("URL") + this.databaseName;
         this.username = this.properties.getProperty("username");
         this.password = this.properties.getProperty("password");
         this.driver = this.properties.getProperty("driver");

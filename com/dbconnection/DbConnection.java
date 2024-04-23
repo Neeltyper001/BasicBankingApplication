@@ -8,7 +8,10 @@ public class DbConnection {
         DbConnectionThread dbConnectionThread = new DbConnectionThread();
         Thread thread = new Thread(dbConnectionThread);
         thread.start();
-        DbConnection.connection = dbConnectionThread.getConnectionResult();
+    }
+
+    public static void setConnection(Connection connection){
+         DbConnection.connection = connection;
     }
 
     public static Connection getConnection(){
