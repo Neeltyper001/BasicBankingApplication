@@ -11,10 +11,13 @@ public class DbConfig {
     private  String password;
     private FileReader fileReader;
     private Properties properties;
-
+    private String config;
+    private String localConfig;
     public DbConfig(){
+        this.config = "config.txt";
+        this.localConfig = "localConfig.txt";
         try{
-            this.fileReader = new FileReader("src/com/env/config.txt");
+            this.fileReader = new FileReader("src/com/env/"+this.localConfig);
             this.properties = new Properties();
             this.properties.load(fileReader);
             setDbConfig();

@@ -84,6 +84,11 @@ public class RegisterPanel extends JPanel implements FrameDimensions {
                 System.out.println(accountNo);
                 System.out.println(pin);
                 RegisterUser.registeUser(fullname,username,password,accountNo,pin);
+                fullnameField.setText("");
+                usernameField.setText("");
+                passwordField.setText("");
+                accountNoField.setText("");
+                pinField.setText("");
             }
         });
         this.add(this.fullnameLabel);

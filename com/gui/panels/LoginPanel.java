@@ -35,6 +35,8 @@ public class LoginPanel extends JPanel implements FrameDimensions {
                 System.out.println(username);
                 System.out.println(password);
                 LoginUser.loginUser(username,password);
+                usernameField.setText("");
+                passwordField.setText("");
             }
         });
         this.add(this.usernameLabel);

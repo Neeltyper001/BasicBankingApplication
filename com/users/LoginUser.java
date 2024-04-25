@@ -17,11 +17,13 @@ public class LoginUser implements LoginQueries {
     public static void loginUser(String username, String password){
 
         try{
-            LoginUser.getSingleUserStatement = DbConnection.getConnection().prepareStatement(CHECK_USERNAME_QUERY);
+            LoginUser.getSingleUserStatement = DbConnection.getConnection().prepareStatement(CHECK_USERNAME_FOR_LOGIN_QUERY);
             LoginUser.getSingleUserStatement.setString(1,username);
             LoginUser.resultSet = getSingleUserStatement.executeQuery();
 
-            if(resultSet.next()){
+            boolean userFound = resultSet.next();
+
+            if(userFound){
                 String dbUsername = resultSet.getString("username");
                 String dbPassword = resultSet.getString("password");
 
@@ -30,12 +32,12 @@ public class LoginUser implements LoginQueries {
                 }
 
                 else{
-                    JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid Credentials!!");
+                    JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid password!!");
                 }
             }
 
             else{
-                JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Some error occured!!");
+                JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid username!!");
             }
 
         }catch (SQLException e){
