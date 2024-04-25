@@ -2,10 +2,7 @@ package com.gui.main;
 
 import com.constants.FrameDimensions;
 import com.eventListeners.RenderOps;
-import com.gui.panels.ButtonsPanel;
-import com.gui.panels.LoginPanel;
-import com.gui.panels.RegisterPanel;
-import com.gui.panels.WelcomeTextPanel;
+import com.gui.panels.*;
 
 import javax.swing.*;
 
@@ -17,6 +14,7 @@ public class MainPanel extends JPanel implements FrameDimensions {
     private RegisterPanel registerPanel;
     private ButtonsPanel buttonsPanel;
     private RenderOps renderOps;
+
     public MainPanel(){
         setLayout(null);
         this.renderers = new Renderers();
@@ -31,6 +29,15 @@ public class MainPanel extends JPanel implements FrameDimensions {
         this.add(this.buttonsPanel);
         Renderers.addPanels("loginPanel",loginPanel);
         Renderers.addPanels("registerPanel",registerPanel);
+        Renderers.addPanels("buttonsPanel",buttonsPanel);
+    }
+
+    public void addDashBoardPanel(){
+        this.add(Renderers.getPanels("dashboardPanel"));
+    }
+
+    public void removeDashboardPanel(){
+        this.remove(Renderers.getPanels("dashboardPanel"));
     }
 
 }
