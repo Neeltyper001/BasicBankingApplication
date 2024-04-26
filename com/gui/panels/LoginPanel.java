@@ -38,12 +38,14 @@ public class LoginPanel extends JPanel implements FrameDimensions {
                 String password = new String(passwordField.getPassword());
                 System.out.println(username);
                 System.out.println(password);
-                LoginUser.LoginResponse loginResponse = LoginUser.loginUser(username,password);
+                LoginUser.loginUser(username,password);
                 usernameField.setText("");
                 passwordField.setText("");
-                if(loginResponse.getLoginStatus()){
+                System.out.println(LoginUser.LoginResponse.getLoginStatus());
+
+                if(LoginUser.LoginResponse.getLoginStatus()){
                     System.out.println("trying to render dashboard");
-                    DashboardPanel dashboardPanel = new DashboardPanel(loginResponse.getAmount());
+                    DashboardPanel dashboardPanel = new DashboardPanel(LoginUser.LoginResponse.getAmount());
                     Renderers.addPanels("dashboardPanel",dashboardPanel);
                     MainFrame.getMainPanel().addDashBoardPanel();
                     Renderers.renderOut("loginPanel");

@@ -1,11 +1,14 @@
 package com.gui.panels;
 
 import com.constants.FrameDimensions;
+import com.gui.main.MainFrame;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class TransferPanel extends JPanel implements FrameDimensions {
     private static JLabel accountNoLabel;
@@ -22,7 +25,12 @@ public class TransferPanel extends JPanel implements FrameDimensions {
         this.setBackground(Color.white);
         TransferPanel.accountNoLabel = new JLabel();
         TransferPanel.accountNoLabel.setText("Account No. ");
-        TransferPanel.accountNoField = new JTextField();
+        try{
+            TransferPanel.accountNoField = new JFormattedTextField(new MaskFormatter("#########"));
+        }
+        catch (ParseException e){
+            JOptionPane.showMessageDialog(MainFrame.getMainPanel(),e.getMessage());
+        }
         TransferPanel.receipentsAccountNoLabel = new JLabel();
         TransferPanel.receipentsAccountNoLabel.setText("Receipent's Account No.");
         TransferPanel.receipentsAccountNoField = new JTextField();

@@ -14,23 +14,21 @@ import java.sql.SQLException;
 public class LoginUser implements LoginQueries {
     private static ResultSet resultSet;
     private static PreparedStatement getSingleUserStatement;
-    private static LoginResponse loginResponse;
 
-    public static class LoginResponse{
+    public static class LoginResponse {
         private static double amount;
         private static boolean loginStatus;
-
-        public static double getAmount(){
-            return LoginResponse.amount;
-        }
 
         public static boolean getLoginStatus(){
             return LoginResponse.loginStatus;
         }
 
+        public static double getAmount(){
+            return LoginResponse.amount;
+        }
     }
 
-    public static LoginResponse loginUser(String username, String password){
+    public static void loginUser(String username, String password){
 
         try{
             LoginUser.getSingleUserStatement = DbConnection.getConnection().prepareStatement(CHECK_USERNAME_FOR_LOGIN_QUERY);
@@ -48,18 +46,27 @@ public class LoginUser implements LoginQueries {
                 if(dbUsername.equals(username) && BCrypt.checkpw(password,dbPassword)){
                     PreparedStatement getUserAccountAmount = DbConnection.getConnection().prepareStatement(GET_USER_ACCOUNT_AMOUNT);
                     getUserAccountAmount.setInt(1,dbUserAccountNo);
+                    ResultSet userAccountAmount = getUserAccountAmount.executeQuery();
                     JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Welcome "+username);
 
-                    LoginResponse.amount = dbUserAccountNo;
-                    LoginResponse.loginStatus = userFound;
-                    return loginResponse;
+                    if(userAccountAmount.next()){
+                        System.out.println("Got loginResponse amount");
+                        LoginResponse.amount = userAccountAmount.getDouble("account_balance");
+                        LoginResponse.loginStatus = true;
+                    }
+
+                    else{
+                        System.out.println("Didn't get it");
+                        LoginResponse.loginStatus  = false;
+                        LoginResponse.amount = 0;
+
+                    }
                 }
 
                 else{
                     JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid password!!");
                     LoginResponse.loginStatus = false;
                     LoginResponse.amount = 0;
-                    return loginResponse;
                 }
             }
 
@@ -67,16 +74,13 @@ public class LoginUser implements LoginQueries {
                 JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid username!!");
                 LoginResponse.loginStatus = false;
                 LoginResponse.amount = 0;
-                    return loginResponse;
             }
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
             LoginResponse.loginStatus = false;
             LoginResponse.amount = 0;
-                return loginResponse;
         }
     }
-
 
 }

@@ -1,11 +1,14 @@
 package com.gui.panels;
 
 import com.constants.FrameDimensions;
+import com.gui.main.MainFrame;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class TransactionPanel extends JPanel implements FrameDimensions {
     private static JLabel accountNoLabel;
@@ -21,6 +24,12 @@ public class TransactionPanel extends JPanel implements FrameDimensions {
         TransactionPanel.accountNoLabel = new JLabel();
         TransactionPanel.accountNoLabel.setText("Account No. ");
         TransactionPanel.accountNoField = new JTextField();
+        try{
+            TransactionPanel.accountNoField = new JFormattedTextField(new MaskFormatter("#########"));
+        }
+        catch (ParseException e){
+            JOptionPane.showMessageDialog(MainFrame.getMainPanel(),e.getMessage());
+        }
         TransactionPanel.amountLabel = new JLabel();
         TransactionPanel.amountLabel.setText("Amount ");
         TransactionPanel.amountField = new JTextField();
