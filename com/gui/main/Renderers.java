@@ -13,6 +13,9 @@ public class Renderers {
     public static void addPanels(String panelName,JPanel panel){
         panelMap.put(panelName,panel);
     }
+    public static void removePanels(String panelName){
+        panelMap.remove(panelName);
+    }
 
     public static JPanel getPanels(String panelName){
         return panelMap.get(panelName);

@@ -86,6 +86,7 @@ public class DashboardPanel extends JPanel implements FrameDimensions {
                 Renderers.renderOut("dashboardPanel");
                 Renderers.renderIn("loginPanel");
                 Renderers.renderIn("buttonsPanel");
+                Renderers.removePanels("dashBoardPanel");
                 MainFrame.getMainPanel().removeDashboardPanel();
             }
         });
