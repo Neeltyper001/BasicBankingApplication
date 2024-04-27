@@ -113,6 +113,12 @@ public class Account implements TransactionQueries {
 
     public boolean transferAmount(String amountTransfer , String receipentsAccountNo){
         double amount = Double.parseDouble(amountTransfer);
+
+        if(amount > this.getAmount()){
+            JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Insufficient balance to transfer amount");
+            return false;
+        }
+
         int receipentsAccountNum = Integer.parseInt(receipentsAccountNo);
         try{
             PreparedStatement checkReceipentsAccountStatement = DbConnection.getConnection().prepareStatement(CHECK_USER_ACCOUNT_NO);
