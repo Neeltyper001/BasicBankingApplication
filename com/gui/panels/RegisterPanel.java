@@ -23,34 +23,48 @@ public class RegisterPanel extends JPanel implements FrameDimensions {
     private JFormattedTextField accountNoField;
     private JPasswordField pinField;
     private JButton registerSubmit;
+    private JLabel registerLabel;
+    private JLabel sectionLabel;
 
     public RegisterPanel(){
-        this.setLayout(new GridLayout(6,2,3,10));
+        this.setLayout(new GridLayout(7,2,3,10));
         this.setBounds(300,350,500,180);
         // fullname labels
         this.fullnameLabel = new JLabel();
         this.fullnameLabel.setText("Fullname");
-        this.fullnameLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.fullnameLabel.setFont(new Font("Arial",Font.BOLD,16));
 
         // username labels
         this.usernameLabel = new JLabel();
         this.usernameLabel.setText("Username");
-        this.usernameLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.usernameLabel.setFont(new Font("Arial",Font.BOLD,16));
+
+        // register labels
+        this.registerLabel = new JLabel();
+        this.registerLabel.setText("Register");
+        this.registerLabel.setFont(new Font("Arial",Font.BOLD,21));
+        this.registerLabel.setForeground(Color.red);
+
+        // section labels
+        this.sectionLabel = new JLabel();
+        this.sectionLabel.setText("Section");
+        this.sectionLabel.setFont(new Font("Arial",Font.BOLD,21));
+        this.sectionLabel.setForeground(Color.red);
 
         // password labels
         this.passwordLabel = new JLabel();
         this.passwordLabel = new JLabel("Password");
-        this.passwordLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.passwordLabel.setFont(new Font("Arial",Font.BOLD,16));
 
         // accountNo labels
         this.accountNoLabel = new JLabel();
-        this.accountNoLabel = new JLabel("Account no.(9 max)");
-        this.accountNoLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.accountNoLabel = new JLabel("Account no. (9 digits)");
+        this.accountNoLabel.setFont(new Font("Arial",Font.BOLD,16));
 
         // pin labels
         this.pinLabel = new JLabel();
-        this.pinLabel = new JLabel("Pin");
-        this.pinLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.pinLabel = new JLabel("Pin (4 digit)");
+        this.pinLabel.setFont(new Font("Arial",Font.BOLD,16));
 
         // text fields and password fields
         this.fullnameField = new JTextField();
@@ -91,6 +105,8 @@ public class RegisterPanel extends JPanel implements FrameDimensions {
                 pinField.setText("");
             }
         });
+        this.add(this.registerLabel);
+        this.add(this.sectionLabel);
         this.add(this.fullnameLabel);
         this.add(this.fullnameField);
         this.add(this.usernameLabel);

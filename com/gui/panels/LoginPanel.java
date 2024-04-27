@@ -19,17 +19,29 @@ public class LoginPanel extends JPanel implements FrameDimensions {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginSubmit;
-
+    private JLabel loginLabel;
+    private JLabel sectionLabel;
     public LoginPanel(){
-        this.setLayout(new GridLayout(3,2,3,10));
-        this.setBounds(300,350,500,100);
+        this.setLayout(new GridLayout(4,2,3,10));
+        this.setBounds(300,350,500,120);
         this.usernameLabel = new JLabel();
         this.usernameLabel.setText("Username");
-        this.usernameLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.usernameLabel.setFont(new Font("Arial",Font.BOLD,16));
+
+        this.loginLabel = new JLabel();
+        this.loginLabel.setText("Login");
+        this.loginLabel.setFont(new Font("Arial",Font.BOLD,21));
+        this.loginLabel.setForeground(Color.red);
+
+        this.sectionLabel = new JLabel();
+        this.sectionLabel.setText("Section");
+        this.sectionLabel.setFont(new Font("Arial",Font.BOLD,21));
+        this.sectionLabel.setForeground(Color.red);
+
         this.usernameField = new JTextField();
         this.passwordLabel = new JLabel();
         this.passwordLabel = new JLabel("Password");
-        this.passwordLabel.setFont(new Font("Arial",Font.BOLD,23));
+        this.passwordLabel.setFont(new Font("Arial",Font.BOLD,16));
         this.passwordField = new JPasswordField();
         this.loginSubmit = new JButton();
         this.loginSubmit.setText("login");
@@ -58,6 +70,8 @@ public class LoginPanel extends JPanel implements FrameDimensions {
 
             }
         });
+        this.add(this.loginLabel);
+        this.add(this.sectionLabel);
         this.add(this.usernameLabel);
         this.add(this.usernameField);
         this.add(this.passwordLabel);
