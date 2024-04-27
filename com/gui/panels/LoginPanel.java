@@ -6,6 +6,7 @@ import com.gui.main.MainFrame;
 import com.gui.main.MainPanel;
 import com.gui.main.Renderers;
 import com.users.LoginUser;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +38,7 @@ public class LoginPanel extends JPanel implements FrameDimensions {
             public void mouseClicked(MouseEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
+
                 System.out.println(username);
                 System.out.println(password);
                 Account account = LoginUser.loginUser(username,password);
@@ -46,7 +48,7 @@ public class LoginPanel extends JPanel implements FrameDimensions {
 
                 if(account.getLoginStatus()){
                     System.out.println("trying to render dashboard");
-                    DashboardPanel dashboardPanel = new DashboardPanel(account);
+                    DashboardPanel dashboardPanel = new DashboardPanel(account,username);
                     Renderers.addPanels("dashboardPanel",dashboardPanel);
                     MainFrame.getMainPanel().addDashBoardPanel();
                     Renderers.renderOut("loginPanel");
