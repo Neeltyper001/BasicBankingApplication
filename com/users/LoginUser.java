@@ -1,5 +1,6 @@
 package com.users;
 
+import com.accounts.Account;
 import com.dbconnection.DbConnection;
 import com.gui.main.MainFrame;
 import com.mysql.cj.log.Log;
@@ -15,26 +16,13 @@ public class LoginUser implements LoginQueries {
     private static ResultSet resultSet;
     private static PreparedStatement getSingleUserStatement;
 
-    public static class LoginResponse {
-        private static double amount;
-        private static boolean loginStatus;
-
-        public static boolean getLoginStatus(){
-            return LoginResponse.loginStatus;
-        }
-
-        public static double getAmount(){
-            return LoginResponse.amount;
-        }
-    }
-
-    public static void loginUser(String username, String password){
+    public static Account loginUser(String username, String password){
+            Account account = new Account(0,false,0);
 
         try{
             LoginUser.getSingleUserStatement = DbConnection.getConnection().prepareStatement(CHECK_USERNAME_FOR_LOGIN_QUERY);
             LoginUser.getSingleUserStatement.setString(1,username);
             LoginUser.resultSet = getSingleUserStatement.executeQuery();
-
             boolean userFound = resultSet.next();
 
             if(userFound){
@@ -51,35 +39,32 @@ public class LoginUser implements LoginQueries {
 
                     if(userAccountAmount.next()){
                         System.out.println("Got loginResponse amount");
-                        LoginResponse.amount = userAccountAmount.getDouble("account_balance");
-                        LoginResponse.loginStatus = true;
+                        account.setAccountNum(dbUserAccountNo);
+                        account.setLoginStatus(true);
+                        account.setAmount(userAccountAmount.getDouble("account_balance"));
+                        return account;
                     }
 
                     else{
                         System.out.println("Didn't get it");
-                        LoginResponse.loginStatus  = false;
-                        LoginResponse.amount = 0;
-
+                        return account;
                     }
                 }
 
                 else{
                     JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid password!!");
-                    LoginResponse.loginStatus = false;
-                    LoginResponse.amount = 0;
+                    return account;
                 }
             }
 
             else{
                 JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid username!!");
-                LoginResponse.loginStatus = false;
-                LoginResponse.amount = 0;
+                return account;
             }
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
-            LoginResponse.loginStatus = false;
-            LoginResponse.amount = 0;
+            return account;
         }
     }
 

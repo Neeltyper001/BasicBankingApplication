@@ -13,4 +13,8 @@ public class AvailableBalance extends JLabel implements FrameDimensions {
         this.setForeground(Color.BLACK);
         this.setBounds(300,20,500,40);
     }
+
+    public void setAvailableBalance(String availableBalance){
+        this.setText("Available balance: "+availableBalance);
+    }
 }

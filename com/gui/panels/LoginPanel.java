@@ -1,5 +1,6 @@
 package com.gui.panels;
 
+import com.accounts.Account;
 import com.constants.FrameDimensions;
 import com.gui.main.MainFrame;
 import com.gui.main.MainPanel;
@@ -38,14 +39,14 @@ public class LoginPanel extends JPanel implements FrameDimensions {
                 String password = new String(passwordField.getPassword());
                 System.out.println(username);
                 System.out.println(password);
-                LoginUser.loginUser(username,password);
+                Account account = LoginUser.loginUser(username,password);
                 usernameField.setText("");
                 passwordField.setText("");
-                System.out.println(LoginUser.LoginResponse.getLoginStatus());
+                System.out.println(account.getLoginStatus());
 
-                if(LoginUser.LoginResponse.getLoginStatus()){
+                if(account.getLoginStatus()){
                     System.out.println("trying to render dashboard");
-                    DashboardPanel dashboardPanel = new DashboardPanel(LoginUser.LoginResponse.getAmount());
+                    DashboardPanel dashboardPanel = new DashboardPanel(account);
                     Renderers.addPanels("dashboardPanel",dashboardPanel);
                     MainFrame.getMainPanel().addDashBoardPanel();
                     Renderers.renderOut("loginPanel");

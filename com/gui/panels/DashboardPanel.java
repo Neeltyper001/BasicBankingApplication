@@ -1,5 +1,6 @@
 package com.gui.panels;
 
+import com.accounts.Account;
 import com.constants.FrameDimensions;
 import com.gui.main.MainFrame;
 import com.gui.main.Renderers;
@@ -21,16 +22,16 @@ public class DashboardPanel extends JPanel implements FrameDimensions {
     private static TransactionPanel creditPanel;
     private static TransferPanel transferPanel;
 
-    public DashboardPanel(double amount){
+    public DashboardPanel(Account account){
         this.setLayout(null);
         setBounds(0,250,FRAME_WIDTH,450);
         this.setBackground(Color.WHITE);
-        DashboardPanel.availableBalance = new AvailableBalance(amount+"");
+        DashboardPanel.availableBalance = new AvailableBalance(account.getAmount()+"");
         DashboardPanel.debit = new JButton();
-        DashboardPanel.debit.setText("Debit");
+        DashboardPanel.debit.setText("witdraw");
         DashboardPanel.debit.setBounds(300,100,100,40);
         DashboardPanel.credit = new JButton();
-        DashboardPanel.credit.setText("Credit");
+        DashboardPanel.credit.setText("deposit");
         DashboardPanel.credit.setBounds(450,100,100,40);
         DashboardPanel.transfer = new JButton();
         DashboardPanel.transfer.setText("Transfer");
@@ -38,9 +39,9 @@ public class DashboardPanel extends JPanel implements FrameDimensions {
         DashboardPanel.logOut = new JButton();
         DashboardPanel.logOut.setText("Log out");
         DashboardPanel.logOut.setBounds(450,300,100,40);
-        DashboardPanel.debitPanel = new TransactionPanel("Debit");
-        DashboardPanel.creditPanel = new TransactionPanel("Credit");
-        DashboardPanel.transferPanel = new TransferPanel();
+        DashboardPanel.debitPanel = new TransactionPanel("debit",account);
+        DashboardPanel.creditPanel = new TransactionPanel("credit",account);
+        DashboardPanel.transferPanel = new TransferPanel(account);
         this.add(debitPanel);
         this.add(creditPanel);
         this.add(transferPanel);
@@ -95,5 +96,9 @@ public class DashboardPanel extends JPanel implements FrameDimensions {
         this.add(this.transfer);
         this.add(this.logOut);
         this.setVisible(false);
+    }
+
+    public static AvailableBalance getAvailableBalance(){
+        return DashboardPanel.availableBalance;
     }
 }

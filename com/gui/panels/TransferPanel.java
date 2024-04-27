@@ -1,5 +1,7 @@
 package com.gui.panels;
 
+import com.accounts.Account;
+import com.accounts.CheckPin;
 import com.constants.FrameDimensions;
 import com.gui.main.MainFrame;
 
@@ -11,36 +13,33 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
 public class TransferPanel extends JPanel implements FrameDimensions {
-    private static JLabel accountNoLabel;
-    private static JTextField accountNoField;
-    private static JLabel receipentsAccountNoLabel;
-    private static JTextField receipentsAccountNoField;
-    private static JLabel amountLabel;
-    private static JTextField amountField;
-    private static JPasswordField pinNoField;
-    private static JButton transactionButton;
-    public TransferPanel(){
-        setLayout(new GridLayout(4,2,0,5));
+
+    private  JLabel receipentsAccountNoLabel;
+    private  JTextField receipentsAccountNoField;
+    private  JLabel amountLabel;
+    private  JTextField amountField;
+    private  JPasswordField pinNoField;
+    private  JButton transactionButton;
+    public TransferPanel(Account account){
+        setLayout(new GridLayout(3,2,0,5));
         this.setBounds(250,170,500,100);
         this.setBackground(Color.white);
-        TransferPanel.accountNoLabel = new JLabel();
-        TransferPanel.accountNoLabel.setText("Account No. ");
+
+        this.receipentsAccountNoLabel = new JLabel();
+        this.receipentsAccountNoLabel.setText("Receipent's Account No.");
         try{
-            TransferPanel.accountNoField = new JFormattedTextField(new MaskFormatter("#########"));
+            this.receipentsAccountNoField = new JFormattedTextField(new MaskFormatter("#########"));
         }
         catch (ParseException e){
             JOptionPane.showMessageDialog(MainFrame.getMainPanel(),e.getMessage());
         }
-        TransferPanel.receipentsAccountNoLabel = new JLabel();
-        TransferPanel.receipentsAccountNoLabel.setText("Receipent's Account No.");
-        TransferPanel.receipentsAccountNoField = new JTextField();
-        TransferPanel.amountLabel = new JLabel();
-        TransferPanel.amountLabel.setText("Amount ");
-        TransferPanel.amountField = new JTextField();
-        TransferPanel.pinNoField = new JPasswordField();
-        TransferPanel.transactionButton = new JButton();
-        TransferPanel.transactionButton.setText("Send amount");
-        TransferPanel.transactionButton.addMouseListener(new MouseAdapter() {
+        this.amountLabel = new JLabel();
+        this.amountLabel.setText("Amount ");
+        this.amountField = new JTextField();
+        this.pinNoField = new JPasswordField();
+        this.transactionButton = new JButton();
+        this.transactionButton.setText("Send amount");
+        this.transactionButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("transfer panel");
@@ -48,17 +47,26 @@ public class TransferPanel extends JPanel implements FrameDimensions {
                 if (option == JOptionPane.OK_OPTION) {
                     // Get the entered PIN
                     char[] pinChars = pinNoField.getPassword();
-                    String pin = new String(pinChars);
+                    String pinNo = new String(pinChars);
+                    System.out.println("Entered PIN: " + pinNo);
+                    boolean isValidPin = CheckPin.CheckPin(account , pinNo);
+                    if(isValidPin){
+                        boolean transactionStatus = account.transferAmount(amountField.getText(),receipentsAccountNoField.getText());
+                        if(transactionStatus){
+                            DashboardPanel.getAvailableBalance().setAvailableBalance(account.getAmount()+"");
+                        }
+                    }
+                   else{
+                       JOptionPane.showMessageDialog(MainFrame.getMainPanel(),"Invalid pin");
+                    }
 
-                    System.out.println("Entered PIN: " + pin);
+
                 } else {
 
                     System.out.println("No PIN entered.");
                 }
             }
         });
-        this.add(accountNoLabel);
-        this.add(accountNoField);
         this.add(receipentsAccountNoLabel);
         this.add(receipentsAccountNoField);
         this.add(amountLabel);
